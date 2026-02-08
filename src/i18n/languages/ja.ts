@@ -4,6 +4,7 @@ import type { Translation } from "../translation";
 export const ja: Translation = {
 	[Key.home]: "Home",
 	[Key.about]: "私たちについて",
+  [Key.steam]: "Steam",
 	[Key.archive]: "Archive",
 	[Key.search]: "検索",
 	[Key.other]: "その他",

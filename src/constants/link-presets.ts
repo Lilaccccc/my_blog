@@ -33,11 +33,11 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/diary/",
 		icon: "material-symbols:book",
 	},
-	[LinkPreset.Gallery]: {
-		name: i18n(I18nKey.gallery),
-		url: "/gallery/",
-		icon: "material-symbols:photo-library",
-	},
+	// [LinkPreset.Gallery]: {
+	// 	name: i18n(I18nKey.gallery),
+	// 	url: "/gallery/",
+	// 	icon: "material-symbols:photo-library",
+	// },
 	[LinkPreset.Projects]: {
 		name: i18n(I18nKey.projects),
 		url: "/projects/",
@@ -53,4 +53,9 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/timeline/",
 		icon: "material-symbols:timeline",
 	},
+  [LinkPreset.Steam]: {
+    name: i18n(I18nKey.steam),
+    url: "/steam/",
+    icon: "fa6-brands:steam",
+  },
 };

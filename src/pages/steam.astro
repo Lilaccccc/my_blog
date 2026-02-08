@@ -1,0 +1,56 @@
+---
+import {i18n} from "../i18n/translation";
+import I18nKey from "../i18n/i18nKey";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+---
+
+<MainGridLayout title={i18n(I18nKey.steam)} description={i18n(I18nKey.steam)}>
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+    <div class="card-base z-10 px-9 py-6 relative w-full ">
+      <p id="steam-status">正在加载 Steam 信息...</p>
+      <div id="steam-info" class="mt-4 hidden"></div>
+    </div>
+  </div>
+
+  <!-- 纯 JS 脚本：客户端执行 -->
+  <script>
+    // Steam API 地址（注意：必须支持 CORS！）
+    const API_URL = 'http://127.0.0.1:8088/steam/user';
+
+    const statusEl = document.getElementById('steam-status');
+    const infoEl = document.getElementById('steam-info');
+
+    fetch(API_URL)
+      .then(response => {
+        if (!response.ok) throw new Error('网络响应失败');
+        return response.json();
+      })
+      .then(data => {
+        const player = data.response.players?.[0];
+        if (!player) throw new Error('未找到玩家数据');
+
+        // 构建 HTML 内容
+        const html = `
+          <img src="${player.avatarfull}" alt="头像" class="w-16 h-16 rounded-full inline-block mr-4">
+          <div class="inline-block align-top">
+            <h2 class="text-xl font-bold">${player.personaname}</h2>
+            <p>SteamID: ${player.steamid}</p>
+            <p>国家: ${player.loccountrycode || '未知'}</p>
+            <p>个人资料: <a href="${player.profileurl}" target="_blank" rel="noopener">查看</a></p>
+          </div>
+        `;
+        infoEl.innerHTML = html;
+        infoEl.classList.remove('hidden');
+        statusEl.textContent = ''; // 清空加载提示
+      })
+      .catch(err => {
+        console.error('获取 Steam 数据失败:', err);
+        statusEl.textContent = '❌ 无法加载 Steam 信息，请稍后再试。';
+      });
+  </script>
+
+  <style>
+      .hidden { display: none; }
+  </style>
+
+</MainGridLayout>
