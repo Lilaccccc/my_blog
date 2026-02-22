@@ -4,6 +4,8 @@ enum I18nKey {
 	archive = "archive",
 	search = "search",
 	other = "other",
+	steam = "steam",
+	statistics = "statistics",
 
 	// 导航栏标题
 	navLinks = "navLinks",

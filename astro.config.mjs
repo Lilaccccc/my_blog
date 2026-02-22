@@ -170,10 +170,14 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		define: {
+			"import.meta.env.VITE_API_URL": JSON.stringify(
+				"http://192.168.20.109:8687/",
+			),
+		},
 		build: {
 			// 静态资源处理优化，防止小图片转 base64 导致 HTML 体积过大（可选，根据需要调整）
 			assetsInlineLimit: 4096,
-
 			rollupOptions: {
 				onwarn(warning, warn) {
 					if (
